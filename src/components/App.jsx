@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Section } from "./Section/Section";
 import { FeedbackOptions } from "./FeedbackOptions/FeedbackOptions";
-
+import { Statistics } from "./Statistics/Statistics";
 
 export class App extends Component {
 
@@ -18,11 +18,16 @@ export class App extends Component {
     }));
   };
 
+  
+
   render() {
     return (
       <div className="container">
         <Section title="Please leave feedback">
           <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedback={this.handleOptions} />
+        </Section>
+        <Section title="Statistics">
+
         </Section>
       </div>
     );
