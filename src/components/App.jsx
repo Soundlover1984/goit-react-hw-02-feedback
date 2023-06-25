@@ -5,7 +5,6 @@ import { Statistics } from "./Statistics/Statistics";
 
 export class App extends Component {
 
-
   state = {
     good: 0,
     neutral: 0,
@@ -23,20 +22,35 @@ export class App extends Component {
     return good + neutral + bad;
   }
 
+
   countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
-    const totalFeedback = this.countTotalFeedback;
-     return totalFeedback > 0 ? Math.round((good / totalFeedback) * 100) : 0;
-  }
+    const totalFeedback = this.countTotalFeedback();
+    return totalFeedback > 0 ? Math.round((good / totalFeedback) * 100) : 0;
+  };
 
   render() {
+
+    const { good, neutral, bad } = this.state;
+    const totalFeedback = this.countTotalFeedback();
+    const positivePercentage = this.countPositiveFeedbackPercentage();
+
     return (
       <div className="container">
         <Section title="Please leave feedback">
-          <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedback={this.handleOptions} />
+          <FeedbackOptions
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.handleOptions}
+          />
         </Section>
         <Section title="Statistics">
-
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedback}
+            positivePercentage={positivePercentage}
+          />
         </Section>
       </div>
     );
